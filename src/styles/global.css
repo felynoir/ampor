@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Ekkamai";
+  src: local("Ekkamai"),
+    url("../../static/fonts/ekkamai/EkkamaiStandard-Light.ttf")
+      format("truetype");
+}
+
+* {
+  font-family: Ekkamai;
+}
