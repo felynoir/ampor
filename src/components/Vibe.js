@@ -21,18 +21,21 @@ const Container = styled.div`
     opacity: 0.4;
     background-color: white;
     animation: ${pulse} 1s var(--number-delay) ease-in infinite;
+    animation-play-state: ${props => (props.playing ? 'running' : 'paused')};
   }
 `
 
-const Vibe = () => {
+const Vibe = ({ playing }) => {
   return (
-    <Container>
+    <Container playing={playing}>
       {Array(20)
         .fill()
         .map((v, i) => (
           <div
+            keys={i}
             style={{
-              '--number-delay': i * Math.random() * 80 + 'ms',
+              height: ((i + 1) * Math.random() * 60) % 60,
+              '--number-delay': (i + 1) * Math.random() * 60 + 'ms',
               '--number-count': i,
             }}
           ></div>
@@ -41,4 +44,4 @@ const Vibe = () => {
   )
 }
 
-export default Vibe
+export default React.memo(Vibe)

@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import AudioPlayer from '../components/AudioPlayer'
 import Vibe from '../components/Vibe'
 
+import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
+
 const CoverFlex = styled(Flex)`
   padding: 32px;
   background: whitesmoke;
@@ -29,6 +31,8 @@ const BOLD = styled.span`
 `
 
 const HomePage = () => {
+  const audioPlayerState = useAudioPlayer()
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -51,14 +55,16 @@ const HomePage = () => {
           flexDirection="column"
           justifyContent="space-between"
         >
+          <div></div>
           <Box>
             <AudioPlayer
+              {...audioPlayerState}
               src={
                 'https://ia800105.us.archive.org/34/items/Yiruma-MayBe/Yiruma-May%20Be.mp3'
               }
             />
           </Box>
-          <Vibe />
+          <Vibe playing={audioPlayerState.playing} />
         </RightFlex>
       </CoverFlex>
     </Layout>
