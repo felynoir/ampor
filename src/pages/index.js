@@ -7,7 +7,7 @@ import { Flex, Box, Button, Text } from 'rebass'
 import PlainGround from '../components/PlainGround'
 import styled from 'styled-components'
 import AudioPlayer from '../components/AudioPlayer'
-import Vibe from '../components/AudioPlayer/Vibe'
+import Vibe from '../components/Vibe'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
@@ -48,11 +48,17 @@ const HomePage = () => {
         </LeftFlex>
         <RightFlex
           flex="1 0"
-          flexDirection="column-reverse"
+          flexDirection="column"
           justifyContent="space-between"
         >
+          <Box>
+            <AudioPlayer
+              src={
+                'https://ia800105.us.archive.org/34/items/Yiruma-MayBe/Yiruma-May%20Be.mp3'
+              }
+            />
+          </Box>
           <Vibe />
-          <div></div>
         </RightFlex>
       </CoverFlex>
     </Layout>

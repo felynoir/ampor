@@ -1,7 +1,27 @@
-import React, { useRef } from 'react'
+import React from 'react'
+import styled from 'styled-components'
+import useAudioPlayer from './useAudioPlayer'
 
-const AudioPlayer = () => {
-  return <div>d</div>
+const Player = styled.div``
+
+const AudioPlayer = ({ src }) => {
+  const {
+    curTime,
+    duration,
+    playing,
+    setPlaying,
+    setClcikedTime,
+  } = useAudioPlayer()
+
+  return (
+    <Player>
+      <audio id="audio">
+        <source src={src} />
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+      {playing}-{curTime}-{duration}
+    </Player>
+  )
 }
 
 export default AudioPlayer
