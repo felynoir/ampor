@@ -11,14 +11,16 @@ const pulse = keyframes`
 `
 
 const Container = styled.div`
+  position: relative;
+
   & > div {
-    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: calc(100% / 20 * var(--number-count));
     width: calc(100% / 20);
-    height: 40px;
     opacity: 0.4;
     background-color: white;
-    animation: ${pulse} 2s var(--number-count)
-      cubic-bezier(0.28, 1.69, 0.82, -0.61) infinite;
+    animation: ${pulse} 1s var(--number-delay) ease-in infinite;
   }
 `
 
@@ -29,7 +31,10 @@ const Vibe = () => {
         .fill()
         .map((v, i) => (
           <div
-            style={{ '--number-count': i * Math.random() * 100 + 'ms' }}
+            style={{
+              '--number-delay': i * Math.random() * 80 + 'ms',
+              '--number-count': i,
+            }}
           ></div>
         ))}
     </Container>

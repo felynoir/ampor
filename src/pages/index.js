@@ -48,11 +48,11 @@ const HomePage = () => {
         </LeftFlex>
         <RightFlex
           flex="1 0"
-          flexDirection="column"
+          flexDirection="column-reverse"
           justifyContent="space-between"
         >
-          <div></div>
           <Vibe />
+          <div></div>
         </RightFlex>
       </CoverFlex>
     </Layout>
