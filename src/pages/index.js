@@ -19,8 +19,10 @@ const LeftFlex = styled(Flex)`
   flex: 1 0 50%;
   background: ${props => props.theme.colors.secondary};
   transform-origin: 0 0;
+  align-items: flex-end;
   @media (max-width: ${props => props.theme.breakpoints[0]}) {
     flex-basis: 100%;
+    align-items: center;
   }
 `
 const RightFlex = styled(Flex)`
@@ -46,11 +48,7 @@ const HomePage = () => {
     <Layout>
       <SEO title="Home" />
       <CoverFlex style={{ height: '100%' }} flexWrap="wrap">
-        <LeftFlex
-          alignItems="flex-end"
-          justifyContent="center"
-          flexDirection="column"
-        >
+        <LeftFlex justifyContent="center" flexDirection="column">
           <GreetingBox mr={[2, 3, 5]} flexDirection="column">
             <Text fontSize={[3, 4, 6]}>
               ThIs Is Me._.
