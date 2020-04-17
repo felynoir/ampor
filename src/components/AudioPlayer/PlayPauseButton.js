@@ -34,7 +34,7 @@ const PlayPauseButton = ({ playing, setPlaying }) => {
     <PlayPause>
       <CheckBox type="checkbox" id="playPauseCheckbox" />
       <CheckBoxLabel
-        for="playPauseCheckbox"
+        htmlFor="playPauseCheckbox"
         onClick={() => setPlaying(!playing)}
       />
     </PlayPause>

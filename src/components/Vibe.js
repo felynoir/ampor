@@ -32,7 +32,7 @@ const Vibe = ({ playing }) => {
         .fill()
         .map((v, i) => (
           <div
-            keys={i}
+            key={i}
             style={{
               height: ((i + 1) * Math.random() * 60) % 60,
               '--number-delay': (i + 1) * Math.random() * 60 + 'ms',

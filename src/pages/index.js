@@ -13,15 +13,23 @@ import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
-  background: whitesmoke;
+  background: ${props => props.theme.colors.secondary};
 `
 const LeftFlex = styled(Flex)`
+  flex: 1 0 50%;
   background: ${props => props.theme.colors.secondary};
   transform-origin: 0 0;
+  @media (max-width: ${props => props.theme.breakpoints[0]}) {
+    flex-basis: 100%;
+  }
 `
 const RightFlex = styled(Flex)`
+  flex: 1 0 50%;
   position: relative;
   background: ${props => props.theme.colors.primary};
+  @media (max-width: ${props => props.theme.breakpoints[0]}) {
+    flex-basis: 100%;
+  }
 `
 const GreetingBox = styled(Flex)`
   text-align: right;
@@ -37,9 +45,8 @@ const HomePage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <CoverFlex style={{ height: '100%' }}>
+      <CoverFlex style={{ height: '100%' }} flexWrap="wrap">
         <LeftFlex
-          flex="1 0"
           alignItems="flex-end"
           justifyContent="center"
           flexDirection="column"
@@ -52,11 +59,7 @@ const HomePage = () => {
             <Text>im glad youre here</Text>
           </GreetingBox>
         </LeftFlex>
-        <RightFlex
-          flex="1 0"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
+        <RightFlex flexDirection="column" justifyContent="space-between">
           <div></div>
           <Box mx="auto">
             <AudioPlayer

@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Ekkamai";
-  src: local("Ekkamai"),
-    url("../../static/fonts/ekkamai/EkkamaiStandard-Light.ttf")
-      format("truetype");
+  font-family: 'Ekkamai';
+  src: local('Ekkamai'),
+    url('../../static/fonts/ekkamai/EkkamaiStandard-Light.ttf')
+      format('truetype');
 }
 
 * {
@@ -10,4 +10,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  background-color: whitesmoke;
 }
