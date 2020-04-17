@@ -17,6 +17,7 @@ const CoverFlex = styled(Flex)`
 `
 const LeftFlex = styled(Flex)`
   background: ${props => props.theme.colors.secondary};
+  transform-origin: 0 0;
 `
 const RightFlex = styled(Flex)`
   position: relative;
@@ -56,7 +57,7 @@ const HomePage = () => {
           justifyContent="space-between"
         >
           <div></div>
-          <Box>
+          <Box mx="auto">
             <AudioPlayer
               {...audioPlayerState}
               src={
