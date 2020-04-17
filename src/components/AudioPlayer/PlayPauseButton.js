@@ -14,10 +14,12 @@ const CheckBoxLabel = styled.label`
   will-change: border-width;
   border-style: solid;
   border-width: 20px 0 20px 40px;
-  &:hover {
-    border-color: transparent transparent transparent
-      ${props => props.theme.colors.secondary};
-    opacity: 0.9;
+  @media (hover: hover) {
+    &:hover {
+      border-color: transparent transparent transparent
+        ${props => props.theme.colors.secondary};
+      opacity: 0.9;
+    }
   }
 `
 
