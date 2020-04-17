@@ -27,7 +27,7 @@ const GreetingBox = styled(Flex)`
   text-align: right;
   color: ${props => props.theme.colors.primary};
 `
-const BOLD = styled.span`
+const BOLD = styled.div`
   font-weight: ${props => props.theme.fontWeights.bold};
 `
 
@@ -46,9 +46,10 @@ const HomePage = () => {
         >
           <GreetingBox mr={[2, 3, 5]} flexDirection="column">
             <Text fontSize={[3, 4, 6]}>
-              ThIs Is Me._.<BOLD>AMPOR</BOLD>{' '}
+              ThIs Is Me._.
+              <BOLD>`AMPOR`</BOLD>{' '}
             </Text>
-            <Text>i'm glad you're here</Text>
+            <Text>im glad youre here</Text>
           </GreetingBox>
         </LeftFlex>
         <RightFlex
