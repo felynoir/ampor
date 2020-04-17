@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const PlayPause = styled.div``
+const PlayPause = styled.div`
+  z-index: 10;
+`
 
 const CheckBoxLabel = styled.label`
   display: block;

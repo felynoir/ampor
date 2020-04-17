@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 
 const pulse = keyframes`
   0%,100% {
-    height: 40px;
+    height: 30px;
   }
   50% {
     height: 100px;

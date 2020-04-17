@@ -7,11 +7,7 @@ import theme from '../gatsby-plugin-theme-ui'
 
 const Container = styled.div`
   height: 100vh;
-`
-const BackDrop = styled.div`
-  height: 100vh;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(6px);
+  height: ${window.innerHeight}px;
 `
 
 const Layout = ({ children }) => {
