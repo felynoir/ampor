@@ -3,6 +3,7 @@ module.exports = {
     title: `Ampor`,
     description: `Me as a little developer in a big world. Nattapat Sriwichailumpun's or Por's personal site. `,
     author: `@ampor`,
+    url: `https://ampor.xyz`,
   },
   plugins: [
     'gatsby-plugin-theme-ui',

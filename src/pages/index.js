@@ -46,7 +46,7 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="It's me" />
       <CoverFlex style={{ height: '100%' }} flexWrap="wrap">
         <LeftFlex justifyContent="center" flexDirection="column">
           <GreetingBox mr={[2, 3, 5]} flexDirection="column">
