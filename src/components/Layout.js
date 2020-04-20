@@ -5,10 +5,7 @@ import styled, { ThemeProvider } from 'styled-components'
 
 import theme from '../gatsby-plugin-theme-ui'
 
-const Container = styled.div`
-  height: 100vh;
-  height: ${window.innerHeight}px;
-`
+const Container = styled.div``
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,7 +20,9 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>{children}</Container>
+      <Container style={{ height: '100vh', height: window.innerHeight + 'px' }}>
+        {children}
+      </Container>
     </ThemeProvider>
   )
 }
