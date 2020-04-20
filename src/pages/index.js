@@ -10,6 +10,7 @@ import AudioPlayer from '../components/AudioPlayer'
 import Vibe from '../components/Vibe'
 
 import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
+import { todayAudio } from '../components/AudioPlayer/audio-lists'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
@@ -60,12 +61,7 @@ const HomePage = () => {
         <RightFlex flexDirection="column" justifyContent="space-between">
           <div></div>
           <Box mx="auto">
-            <AudioPlayer
-              {...audioPlayerState}
-              src={
-                'https://ia800105.us.archive.org/34/items/Yiruma-MayBe/Yiruma-May%20Be.mp3'
-              }
-            />
+            <AudioPlayer {...audioPlayerState} song={todayAudio} />
           </Box>
           <Vibe playing={audioPlayerState.playing} />
         </RightFlex>
