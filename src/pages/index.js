@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Link } from 'gatsby'
 
 import Layout from '../components/Layout'
@@ -11,6 +11,7 @@ import Vibe from '../components/Vibe'
 
 import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
 import { todayAudio } from '../components/AudioPlayer/audio-lists'
+import Helmet from 'react-helmet'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
