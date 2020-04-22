@@ -12,6 +12,7 @@ import Vibe from '../components/Vibe'
 import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
 import { todayAudio } from '../components/AudioPlayer/audio-lists'
 import Helmet from 'react-helmet'
+import SpotifyPlayback from '../components/Spotify'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
@@ -60,7 +61,7 @@ const HomePage = () => {
           </GreetingBox>
         </LeftFlex>
         <RightFlex flexDirection="column" justifyContent="space-between">
-          <div></div>
+          <SpotifyPlayback />
           <Box mx="auto">
             <AudioPlayer {...audioPlayerState} song={todayAudio} />
           </Box>
