@@ -44,7 +44,7 @@ const BOLD = styled.div`
   font-weight: ${props => props.theme.fontWeights.bold};
 `
 
-const HomePage = () => {
+const HomePage = ({ params, ...props }) => {
   const audioPlayerState = useAudioPlayer()
 
   return (
