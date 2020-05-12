@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+import theme from './theme'
 
 import { useEffect } from 'react'
 
@@ -14,7 +15,11 @@ const Layout = ({ children }) => {
     document.documentElement.style.setProperty('--vh', `${vh}px`)
   }, [])
 
-  return <Container>{children}</Container>
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>{children}</Container>
+    </ThemeProvider>
+  )
 }
 
 export default Layout
