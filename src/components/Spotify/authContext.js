@@ -44,7 +44,7 @@ export const AuthProvider = ({ children, location }) => {
     if (isExpired()) {
       // get news access token
       try {
-        const refresh_token = localStorage.get('refresh_token')
+        const refresh_token = localStorage.getItem('refresh_token')
         const res = await Axios.get(
           `${URL_ENDPOINT}/refresh_token?refresh_token=${refresh_token}`
         )
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children, location }) => {
         console.log(e)
       }
     }
-    return localStorage.get('access_token')
+    return localStorage.getItem('access_token')
   }
 
   return (

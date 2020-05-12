@@ -19,9 +19,9 @@ const Layout = ({ children, location }) => {
 
   return (
     <AuthProvider location={location}>
-      {/* <ThemeProvider theme={theme}> */}
-      <Container>{children}</Container>
-      {/* </ThemeProvider> */}
+      <ThemeProvider theme={theme}>
+        <Container>{children}</Container>
+      </ThemeProvider>
     </AuthProvider>
   )
 }

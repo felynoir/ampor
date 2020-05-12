@@ -18,23 +18,6 @@ const AudioPlayer = () => {
         <source src="" />
         Your browser does not support the <code>audio</code> element.
       </audio> */}
-      <Spotify
-        render={({ title, play, setPlay }) => (
-          <>
-            <Text
-              mb={3}
-              color="secondary"
-              fontSize={[2, 3, 4]}
-              textAlign="center"
-            >
-              TODAY SONG
-              <TypingLetter>{title | 'No Title'}</TypingLetter>
-            </Text>
-            <PlayPauseButton playing={play} setPlaying={setPlay} />
-            <Vibe style={{ width: '100%' }} />
-          </>
-        )}
-      />
       )
     </Flex>
   )

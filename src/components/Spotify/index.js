@@ -1,48 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react'
-import usePlayblack from './usePlayer'
-import withLocation from '../../utils/withLocation'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import usePlayer from './usePlayer'
+import { useAuth } from './authContext'
 import Helmet from 'react-helmet'
 
 const Spotify = ({ render, location, ...props }) => {
-  const player = usePlayer()
-  const [play, setPlayer] = useState(false)
+  const [player] = usePlayer(getToken)
+  const { isAuthenticated, getToken } = useAuth()
+  const [playing, setPlaying] = useState(false)
+  const isFirstRender = useRef(true)
 
   const callAPI = async ({ url, method, data }) => {
-    const {
-      _options: { getOAuthToken, id },
-    } = player
-    await getOAuthToken(access_token => {
-      console.log(access_token)
-      axios({
-        url,
-        method,
-        data,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
+    const access_token = await getToken()
+    console.log(access_token)
+    axios({
+      url,
+      method,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      },
     })
   }
 
-  const setPlay = async () => {
-    const url = play
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
+    const url = playing
       ? 'https://api.spotify.com/v1/me/player/pause'
       : 'https://api.spotify.com/v1/me/player/play'
-    await callAPI({ url, method: 'PUT' })
-    setPlayer(!play)
-  }
+    callAPI({ url, method: 'PUT' })
+  }, [playing])
 
   return (
     <>
       <Helmet>
         <script src="https://sdk.scdn.co/spotify-player.js"></script>
       </Helmet>
-      {render({ play, setPlay })}
+      HEY
     </>
   )
 }
 
-export default withLocation(Spotify)
+export default Spotify
