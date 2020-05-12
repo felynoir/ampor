@@ -1,18 +1,14 @@
-import React, { useRef, useEffect } from 'react'
-import { Link } from 'gatsby'
+import React, { useEffect } from 'react'
 
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import { Flex, Box, Button, Text } from 'rebass'
-import PlainGround from '../components/PlainGround'
 import styled from 'styled-components'
 import AudioPlayer from '../components/AudioPlayer'
-import Vibe from '../components/Vibe'
 
 import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
 import { todayAudio } from '../components/AudioPlayer/audio-lists'
-import Helmet from 'react-helmet'
-import SpotifyPlayback from '../components/Spotify'
+import Axios from 'axios'
 
 const CoverFlex = styled(Flex)`
   padding: 32px;
@@ -47,6 +43,16 @@ const BOLD = styled.div`
 const HomePage = ({ params, ...props }) => {
   const audioPlayerState = useAudioPlayer()
 
+  useEffect(() => {
+    const callApi = async () => {
+      const res = await Axios.get(
+        `https://api.genius.com/songs/4906198?access_token=iFYbsUEjcX6Y6jzgjjmuqkNoRASAYFW53yJXWdywBE84NOQILwaOCJD4vWOyCFfm`
+      )
+      console.log(res.data)
+    }
+    callApi()
+  }, [])
+
   return (
     <Layout>
       <SEO title="It's me" />
@@ -60,12 +66,8 @@ const HomePage = ({ params, ...props }) => {
             <Text>im glad youre here</Text>
           </GreetingBox>
         </LeftFlex>
-        <RightFlex flexDirection="column" justifyContent="space-between">
-          <SpotifyPlayback />
-          <Box mx="auto">
-            <AudioPlayer {...audioPlayerState} song={todayAudio} />
-          </Box>
-          <Vibe playing={audioPlayerState.playing} />
+        <RightFlex>
+          <AudioPlayer />
         </RightFlex>
       </CoverFlex>
     </Layout>

@@ -16,10 +16,12 @@ const useAudioPlayer = () => {
 
     const setAudioTime = () => setCurTime(audio.currentTime)
 
-    audio.addEventListener('loadeddata', setAudioData)
-    audio.addEventListener('timeupdate', setAudioTime)
+    if (audio) {
+      audio.addEventListener('loadeddata', setAudioData)
+      audio.addEventListener('timeupdate', setAudioTime)
 
-    playing ? audio.play() : audio.pause()
+      playing ? audio.play() : audio.pause()
+    }
 
     if (clickedTime && clickedTime !== curTime) {
       audio.currentTime = clickedTime
@@ -27,8 +29,10 @@ const useAudioPlayer = () => {
     }
 
     return () => {
-      audio.removeEventListener('loadeddata', setAudioData)
-      audio.removeEventListener('timeupdate', setAudioTime)
+      if (audio) {
+        audio.removeEventListener('loadeddata', setAudioData)
+        audio.removeEventListener('timeupdate', setAudioTime)
+      }
     }
   })
 

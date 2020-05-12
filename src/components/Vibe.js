@@ -25,7 +25,7 @@ const Container = styled.div`
   }
 `
 
-const Vibe = ({ playing }) => {
+const Vibe = ({ playing = true }) => {
   return (
     <Container playing={playing}>
       {Array(20)
