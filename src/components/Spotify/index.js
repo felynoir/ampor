@@ -9,7 +9,6 @@ const Spotify = ({ render, location, ...props }) => {
   const player = usePlayer()
   const [play, setPlayer] = useState(false)
 
-  console.log(player)
   const callAPI = async ({ url, method, data }) => {
     const {
       _options: { getOAuthToken, id },
@@ -35,18 +34,6 @@ const Spotify = ({ render, location, ...props }) => {
     await callAPI({ url, method: 'PUT' })
     setPlayer(!play)
   }
-
-  useEffect(() => {
-    const { params, navigate } = props
-    console.log(location)
-    console.log(params, props)
-    if (params.access_token && params.refresh_token && params.expires_in) {
-      localStorage.setItem('access_token', params.access_token)
-      localStorage.setItem('refresh_token', params.refresh_token)
-      localStorage.setItem('expires_in', params.expires_in)
-      navigate('/')
-    }
-  }, [props.params])
 
   return (
     <>

@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react'
 
-import { getOAuthToken as getAuth } from './Authentication'
+// import { getOAuthToken as getAuth } from './Authentication'
 
 const usePlayer = () => {
   let player
   useEffect(() => {
-    console.log('wait')
     window.onSpotifyWebPlaybackSDKReady = () => {
       player = new window.Spotify.Player({
         name: 'Ampor',
         getOAuthToken: cb => {
-          cb(getAuth())
+          // cb(getToken())
         },
       })
 

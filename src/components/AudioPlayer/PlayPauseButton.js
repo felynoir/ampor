@@ -19,7 +19,7 @@ const CheckBoxLabel = styled.label`
   @media (hover: hover) {
     &:hover {
       border-color: transparent transparent transparent
-        ${props => props.theme.colors.secondary};
+        ${props => props?.theme?.colors?.secondary};
       opacity: 0.9;
     }
   }
