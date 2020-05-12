@@ -5,24 +5,29 @@ exports.onCreateNode = async ({ node, actions }) => {
   const { createNode, createNodeField } = actions
 
   if (node.internal.type === 'MarkdownRemark') {
-    const geniusId = node.frontmatter.geniusId
-    const res = await axios.get(
-      `https://api.genius.com/songs/${geniusId}?access_token=iFYbsUEjcX6Y6jzgjjmuqkNoRASAYFW53yJXWdywBE84NOQILwaOCJD4vWOyCFfm`
-    )
-
-    createNode({
-      ...res.data.response.song,
-      id: geniusId,
-      // parent: `the-id-of-the-parent-node`, // or null if it's a source node without a parent
-      children: [],
-      internal: {
-        type: `SongFromGenius`,
-        contentDigest: crypto
-          .createHash(`md5`)
-          .update(JSON.stringify(res.data.response.song))
-          .digest(`hex`),
-      },
-    })
+    if (node.frontmatter.geniusId === null) return
+    try {
+      const geniusId = node.frontmatter.geniusId
+      const res = await axios.get(
+        `https://api.genius.com/songs/${geniusId}?access_token=iFYbsUEjcX6Y6jzgjjmuqkNoRASAYFW53yJXWdywBE84NOQILwaOCJD4vWOyCFfm`
+      )
+      if (res.status !== 200) return
+      createNode({
+        ...res.data.response.song,
+        id: geniusId,
+        // parent: `the-id-of-the-parent-node`, // or null if it's a source node without a parent
+        children: [],
+        internal: {
+          type: `SongFromGenius`,
+          contentDigest: crypto
+            .createHash(`md5`)
+            .update(JSON.stringify(res.data.response.song))
+            .digest(`hex`),
+        },
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -34,13 +39,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     {
       allMarkdownRemark(
+        filter: { frontmatter: { geniusId: { ne: null } } }
         sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
       ) {
         edges {
           node {
             frontmatter {
               slug
+              geniusId
             }
           }
         }
@@ -59,8 +65,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.frontmatter.slug,
       component: songTemplate,
       context: {
-        // additional data can be passed via context
-        slug: node.frontmatter.slug,
+        geniusId: node.frontmatter.geniusId ? node.frontmatter.geniusId : 'ff',
       },
     })
   })
