@@ -12,7 +12,7 @@ const defaultContext = {
 export const AuthContext = React.createContext(defaultContext)
 export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({ children, location, params, navigate }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState()
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   useEffect(() => {
     const initAuth = () => {

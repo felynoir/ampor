@@ -58,6 +58,7 @@ const SongTemplate = ({ data: { song } }) => {
     if (res.status === 200 && !!res.data.location)
       window.location.href = res.data.location
   }
+  console.log(isAuthenticated)
 
   return (
     <Layout>
