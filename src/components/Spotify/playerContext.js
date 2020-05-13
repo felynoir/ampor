@@ -13,6 +13,7 @@ export const useSpotifyPlayer = () => useContext(SpotifyPlayerContext)
 export const SpotifyPlayerProvider = ({ children }) => {
   const { isAuthenticated, getToken } = useAuth()
   const [spotifyPlayer, setSpotifyPlayer] = useState()
+  const [state, setState] = useState()
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
       if (!isAuthenticated) return
@@ -36,16 +37,18 @@ export const SpotifyPlayerProvider = ({ children }) => {
       player.addListener('playback_error', ({ message }) => {
         console.error('4', message)
       })
-      player.addListener('player_state_changed', state => {
-        console.log(state)
+      player.addListener('player_state_changed', async state => {
+        console.log('state', state)
+        setState(state)
       })
-      player.addListener('ready', ({ device_id }) => {
+      player.addListener('ready', async ({ device_id }) => {
         console.log('Ready with Device ID', device_id)
         setSpotifyPlayer(player)
       })
       player.addListener('not_ready', ({ device_id }) => {
         console.log('Device ID has gone offline', device_id)
       })
+
       player.connect()
     }
   })
@@ -54,6 +57,7 @@ export const SpotifyPlayerProvider = ({ children }) => {
     <SpotifyPlayerContext.Provider
       value={{
         spotifyPlayer,
+        state,
       }}
     >
       {isAuthenticated && (

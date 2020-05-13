@@ -6,7 +6,7 @@ import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 import { errorHandler } from './errorHandler'
 
 const Spotify = ({ getToken }) => {
-  const { spotifyPlayer } = useSpotifyPlayer()
+  const { spotifyPlayer, state } = useSpotifyPlayer()
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState()
   const isFirstRender = useRef(true)
@@ -45,7 +45,11 @@ const Spotify = ({ getToken }) => {
   return (
     <>
       {error}
-      <PlayPauseButton playing={playing} setPlaying={setPlaying} />
+      {state ? (
+        <PlayPauseButton playing={playing} setPlaying={setPlaying} />
+      ) : (
+        <div>Please Select Device</div>
+      )}
     </>
   )
 }
