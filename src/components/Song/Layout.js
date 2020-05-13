@@ -10,7 +10,7 @@ const Container = styled.div`
   height: calc(var(--vh, 1vh) * 100);
 `
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, location, params, navigate }) => {
   useEffect(() => {
     console.log(location)
     let vh = window.innerHeight * 0.01
@@ -18,7 +18,7 @@ const Layout = ({ children, location }) => {
   }, [])
 
   return (
-    <AuthProvider location={location}>
+    <AuthProvider location={location} params={params} navigate={navigate}>
       <ThemeProvider theme={theme}>
         <Container>{children}</Container>
       </ThemeProvider>

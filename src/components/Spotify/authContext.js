@@ -11,23 +11,21 @@ const defaultContext = {
 
 export const AuthContext = React.createContext(defaultContext)
 export const useAuth = () => useContext(AuthContext)
-export const AuthProvider = ({ children, location }) => {
+export const AuthProvider = ({ children, location, params, navigate }) => {
   const [isAuthenticated, setIsAuthenticated] = useState()
 
   useEffect(() => {
     const initAuth = () => {
-      const { params, navigate } = location
       if (
         params &&
         params.access_token &&
         params.refresh_token &&
         params.expires_in
       ) {
-        console.log('ff')
         localStorage.setItem('access_token', params.access_token)
         localStorage.setItem('refresh_token', params.refresh_token)
         localStorage.setItem('expires_in', params.expires_in)
-        navigate('/')
+        navigate(location.pathname)
         setIsAuthenticated(true)
       }
     }
