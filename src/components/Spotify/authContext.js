@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Axios from 'axios'
 
-const URL_ENDPOINT = 'http://localhost:8000'
+const URL_ENDPOINT = 'http://localhost:8888'
 
 const defaultContext = {
   isAuthenticated: false,
@@ -47,8 +47,9 @@ export const AuthProvider = ({ children, location, params, navigate }) => {
           `${URL_ENDPOINT}/refresh_token?refresh_token=${refresh_token}`
         )
         if (res.status !== 200) return
-        const access_token = res.data.access_token
+        const { access_token, expires_in } = res.data
         localStorage.setItem('access_token', access_token)
+        localStorage.setItem('expires_in', expires_in)
         return access_token
       } catch (e) {
         console.log(e)

@@ -4,6 +4,7 @@ import theme from './theme'
 import { AuthProvider } from '../Spotify/authContext'
 import withLocation from '../../utils/withLocation'
 import { useEffect } from 'react'
+import { SpotifyPlayerProvider } from '../Spotify/playerContext'
 
 const Container = styled.div`
   height: 100vh;
@@ -18,9 +19,11 @@ const Layout = ({ children, location, params, navigate }) => {
 
   return (
     <AuthProvider location={location} params={params} navigate={navigate}>
-      <ThemeProvider theme={theme}>
-        <Container>{children}</Container>
-      </ThemeProvider>
+      <SpotifyPlayerProvider>
+        <ThemeProvider theme={theme}>
+          <Container>{children}</Container>
+        </ThemeProvider>
+      </SpotifyPlayerProvider>
     </AuthProvider>
   )
 }

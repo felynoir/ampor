@@ -1,10 +1,21 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useAuth } from './authContext'
 
-const usePlayer = getToken => {
-  let player
+const defaultContext = {
+  spotifyPlayer: null,
+}
+
+export const SpotifyPlayerContext = React.createContext(defaultContext)
+export const useSpotifyPlayer = () => useContext(SpotifyPlayerContext)
+
+export const SpotifyPlayerProvider = ({ children }) => {
+  const { isAuthenticated, getToken } = useAuth()
+  const [spotifyPlayer, setSpotifyPlayer] = useState()
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
-      player = new window.Spotify.Player({
+      if (!isAuthenticated) return
+
+      const player = new window.Spotify.Player({
         name: 'Ampor',
         getOAuthToken: cb => {
           cb(getToken())
@@ -28,6 +39,7 @@ const usePlayer = getToken => {
       })
       player.addListener('ready', ({ device_id }) => {
         console.log('Ready with Device ID', device_id)
+        setSpotifyPlayer(player)
       })
       player.addListener('not_ready', ({ device_id }) => {
         console.log('Device ID has gone offline', device_id)
@@ -36,7 +48,13 @@ const usePlayer = getToken => {
     }
   })
 
-  return { player }
+  return (
+    <SpotifyPlayerContext.Provider
+      value={{
+        spotifyPlayer,
+      }}
+    >
+      {children}
+    </SpotifyPlayerContext.Provider>
+  )
 }
-
-export default usePlayer

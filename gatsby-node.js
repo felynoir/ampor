@@ -11,6 +11,7 @@ exports.onCreateNode = async ({ node, actions }) => {
       const res = await axios.get(
         `https://api.genius.com/songs/${geniusId}?access_token=iFYbsUEjcX6Y6jzgjjmuqkNoRASAYFW53yJXWdywBE84NOQILwaOCJD4vWOyCFfm`
       )
+      console.log('found', node)
       if (res.status !== 200) return
       createNode({
         ...res.data.response.song,
