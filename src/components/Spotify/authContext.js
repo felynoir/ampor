@@ -1,23 +1,27 @@
 // src/react-auth0-spa.js
 import React, { useState, useEffect, useContext } from 'react'
 import Axios from 'axios'
+import queryString from 'query-string'
 
 const URL_ENDPOINT = 'http://localhost:8888'
 
 const defaultContext = {
   isAuthenticated: false,
-  getToken: () => 'fewfew',
+  getToken: () => {},
 }
 
 export const AuthContext = React.createContext(defaultContext)
 export const useAuth = () => useContext(AuthContext)
-export const AuthProvider = ({ children, location, params, navigate }) => {
+export const AuthProvider = ({ children, location }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   useEffect(() => {
     const initAuth = () => {
+      const { search, pathname } = location
+      const params = search ? queryString.parse(search) : {}
       if (
         params &&
+        pathname &&
         params.access_token &&
         params.refresh_token &&
         params.expires_in
@@ -25,7 +29,7 @@ export const AuthProvider = ({ children, location, params, navigate }) => {
         localStorage.setItem('access_token', params.access_token)
         localStorage.setItem('refresh_token', params.refresh_token)
         localStorage.setItem('expires_in', params.expires_in)
-        navigate(location.pathname)
+        window.location.href = pathname
         setIsAuthenticated(true)
       }
     }
