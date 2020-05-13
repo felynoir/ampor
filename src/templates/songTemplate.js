@@ -58,41 +58,41 @@ const SongTemplate = ({ data: { song } }) => {
     if (res.status === 200 && !!res.data.location)
       window.location.href = res.data.location
   }
-  console.log(isAuthenticated)
+  console.log('songTem', isAuthenticated)
 
   return (
+    <Container>
+      <MediaContainer>
+        <Box>
+          <Text mb={3} color="primary" fontSize={[2, 3, 4]} textAlign="center">
+            {full_title}
+          </Text>
+          {isAuthenticated ? (
+            <Spotify />
+          ) : (
+            <SpotifyLogin onClick={() => handleLoggin()}>
+              Spotify Login
+            </SpotifyLogin>
+          )}
+        </Box>
+        <Box>
+          <SongCover src={song_art_image_url} alt="song cover" />
+        </Box>
+      </MediaContainer>
+      <div>Lyrics is here</div>
+    </Container>
+  )
+}
+
+const WrapLayoutToTemplate = props => {
+  return (
     <Layout>
-      <Container>
-        <MediaContainer>
-          <Box>
-            <Text
-              mb={3}
-              color="primary"
-              fontSize={[2, 3, 4]}
-              textAlign="center"
-            >
-              {full_title}
-            </Text>
-            {isAuthenticated ? (
-              <Spotify />
-            ) : (
-              <SpotifyLogin onClick={() => handleLoggin()}>
-                Spotify Login
-              </SpotifyLogin>
-            )}
-            {/* <Vibe style={{ width: '100%' }} /> */}
-          </Box>
-          <Box>
-            <SongCover src={song_art_image_url} alt="song cover" />
-          </Box>
-        </MediaContainer>
-        <div>Lyrics is here</div>
-      </Container>
+      <SongTemplate {...props} />
     </Layout>
   )
 }
 
-export default SongTemplate
+export default WrapLayoutToTemplate
 
 export const pageQuery = graphql`
   query($geniusId: String!) {

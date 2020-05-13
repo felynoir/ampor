@@ -4,24 +4,24 @@ import usePlayer from './usePlayer'
 import { useAuth } from './authContext'
 import Helmet from 'react-helmet'
 
-const Spotify = ({ render, location, ...props }) => {
-  const [player] = usePlayer(getToken)
-  const { isAuthenticated, getToken } = useAuth()
+const Spotify = props => {
+  // const { isAuthenticated, getToken } = useAuth()
+  // const [player] = usePlayer(() => 'fff')
   const [playing, setPlaying] = useState(false)
   const isFirstRender = useRef(true)
 
   const callAPI = async ({ url, method, data }) => {
-    const access_token = await getToken()
-    console.log(access_token)
-    axios({
-      url,
-      method,
-      data,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      },
-    })
+    // const access_token = await getToken()
+    // console.log(access_token)
+    // axios({
+    //   url,
+    //   method,
+    //   data,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${access_token}`,
+    //   },
+    // })
   }
 
   useEffect(() => {
