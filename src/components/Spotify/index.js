@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import usePlayer from './playerContext'
+import { useSpotifyPlayer } from './playerContext'
 import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 
 import { errorHandler } from './errorHandler'
 
 const Spotify = ({ getToken }) => {
+  const { spotifyPlayer } = useSpotifyPlayer()
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState()
   const isFirstRender = useRef(true)

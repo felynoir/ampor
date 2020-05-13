@@ -13,9 +13,13 @@ const defaultContext = {
 export const AuthContext = React.createContext(defaultContext)
 export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({ children, location }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
+    if (getOAuthToken() !== null) {
+      setIsAuthenticated(true)
+    }
+
     const initAuth = () => {
       const { search, pathname } = location
       const params = search ? queryString.parse(search) : {}
@@ -50,13 +54,14 @@ export const AuthProvider = ({ children, location }) => {
         const res = await Axios.get(
           `${URL_ENDPOINT}/refresh_token?refresh_token=${refresh_token}`
         )
-        if (res.status !== 200) return
         const { access_token, expires_in } = res.data
         localStorage.setItem('access_token', access_token)
         localStorage.setItem('expires_in', expires_in)
         return access_token
       } catch (e) {
-        console.log(e)
+        console.error(e)
+        setIsAuthenticated(false)
+        return
       }
     }
     return localStorage.getItem('access_token')

@@ -56,9 +56,11 @@ export const SpotifyPlayerProvider = ({ children }) => {
         spotifyPlayer,
       }}
     >
-      <Helmet>
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
-      </Helmet>
+      {isAuthenticated && (
+        <Helmet>
+          <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        </Helmet>
+      )}
       {children}
     </SpotifyPlayerContext.Provider>
   )
