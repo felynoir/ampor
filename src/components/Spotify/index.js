@@ -1,27 +1,26 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import usePlayer from './usePlayer'
-import { useAuth } from './authContext'
 import Helmet from 'react-helmet'
+import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 
-const Spotify = props => {
-  // const { isAuthenticated, getToken } = useAuth()
-  // const [player] = usePlayer(() => 'fff')
+const Spotify = ({ getToken }) => {
+  const { player } = usePlayer(getToken)
   const [playing, setPlaying] = useState(false)
   const isFirstRender = useRef(true)
 
   const callAPI = async ({ url, method, data }) => {
-    // const access_token = await getToken()
-    // console.log(access_token)
-    // axios({
-    //   url,
-    //   method,
-    //   data,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${access_token}`,
-    //   },
-    // })
+    const access_token = await getToken()
+    console.log(access_token)
+    axios({
+      url,
+      method,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
   }
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const Spotify = props => {
       <Helmet>
         <script src="https://sdk.scdn.co/spotify-player.js"></script>
       </Helmet>
-      HEY
+      <PlayPauseButton playing={playing} setPlaying={setPlaying} />
     </>
   )
 }

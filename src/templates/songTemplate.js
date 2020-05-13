@@ -47,7 +47,7 @@ const SpotifyLogin = styled.button`
 `
 
 const SongTemplate = ({ data: { song } }) => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, getToken } = useAuth()
   const { full_title, song_art_image_url } = song
   const handleLoggin = async () => {
     if (typeof window === undefined) return
@@ -58,7 +58,7 @@ const SongTemplate = ({ data: { song } }) => {
     if (res.status === 200 && !!res.data.location)
       window.location.href = res.data.location
   }
-  console.log('songTem', isAuthenticated)
+  console.log('songTem', isAuthenticated, getToken)
 
   return (
     <Container>
@@ -68,7 +68,7 @@ const SongTemplate = ({ data: { song } }) => {
             {full_title}
           </Text>
           {isAuthenticated ? (
-            <Spotify />
+            <Spotify getToken={getToken} />
           ) : (
             <SpotifyLogin onClick={() => handleLoggin()}>
               Spotify Login

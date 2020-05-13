@@ -12,7 +12,6 @@ const Container = styled.div`
 
 const Layout = ({ children, location, params, navigate }) => {
   useEffect(() => {
-    console.log(location)
     let vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
   }, [])

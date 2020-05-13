@@ -6,7 +6,7 @@ const URL_ENDPOINT = 'http://localhost:8000'
 
 const defaultContext = {
   isAuthenticated: false,
-  getToken: () => {},
+  getToken: () => 'fewfew',
 }
 
 export const AuthContext = React.createContext(defaultContext)
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children, location, params, navigate }) => {
     return new Date(expires_in) < new Date()
   }
 
-  const getToken = async () => {
+  const getOAuthToken = async () => {
     //check expired
     if (isExpired()) {
       // get news access token
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children, location, params, navigate }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        getToken,
+        getToken: () => getOAuthToken(),
       }}
     >
       {children}

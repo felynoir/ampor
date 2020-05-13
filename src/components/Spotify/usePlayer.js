@@ -7,6 +7,7 @@ const usePlayer = getToken => {
       player = new window.Spotify.Player({
         name: 'Ampor',
         getOAuthToken: cb => {
+          console.log(getToken)
           cb(getToken())
         },
       })
@@ -37,7 +38,7 @@ const usePlayer = getToken => {
     }
   })
 
-  return player
+  return { player }
 }
 
 export default usePlayer
