@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import usePlayer from './playerContext'
-import Helmet from 'react-helmet'
 import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 
 import { errorHandler } from './errorHandler'
@@ -44,9 +43,6 @@ const Spotify = ({ getToken }) => {
 
   return (
     <>
-      <Helmet>
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
-      </Helmet>
       {error}
       <PlayPauseButton playing={playing} setPlaying={setPlaying} />
     </>

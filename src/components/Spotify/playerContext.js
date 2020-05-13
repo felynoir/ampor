@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
+import Helmet from 'react-helmet'
 import { useAuth } from './authContext'
 
 const defaultContext = {
   spotifyPlayer: null,
+  state: {},
 }
 
 export const SpotifyPlayerContext = React.createContext(defaultContext)
@@ -54,6 +56,9 @@ export const SpotifyPlayerProvider = ({ children }) => {
         spotifyPlayer,
       }}
     >
+      <Helmet>
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+      </Helmet>
       {children}
     </SpotifyPlayerContext.Provider>
   )
