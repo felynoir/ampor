@@ -4,23 +4,31 @@ import usePlayer from './usePlayer'
 import Helmet from 'react-helmet'
 import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 
+import { errorHandler } from './errorHandler'
+
 const Spotify = ({ getToken }) => {
   const { player } = usePlayer(getToken)
   const [playing, setPlaying] = useState(false)
+  const [error, setError] = useState()
   const isFirstRender = useRef(true)
 
   const callAPI = async ({ url, method, data }) => {
-    const access_token = await getToken()
-    console.log(access_token)
-    axios({
-      url,
-      method,
-      data,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      },
-    })
+    try {
+      const access_token = await getToken()
+      console.log(access_token)
+      const res = await axios({
+        url,
+        method,
+        data,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      setError()
+    } catch (e) {
+      setError(errorHandler(e.response.data.error))
+    }
   }
 
   useEffect(() => {
@@ -40,6 +48,7 @@ const Spotify = ({ getToken }) => {
       <Helmet>
         <script src="https://sdk.scdn.co/spotify-player.js"></script>
       </Helmet>
+      {error}
       <PlayPauseButton playing={playing} setPlaying={setPlaying} />
     </>
   )

@@ -7,12 +7,10 @@ const usePlayer = getToken => {
       player = new window.Spotify.Player({
         name: 'Ampor',
         getOAuthToken: cb => {
-          console.log(getToken)
           cb(getToken())
         },
       })
 
-      console.log('hey')
       player.addListener('initialization_error', ({ message }) => {
         console.error('1', message)
       })
