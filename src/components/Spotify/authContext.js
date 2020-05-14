@@ -16,12 +16,15 @@ export const AuthProvider = ({ children, location }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    if (getOAuthToken() !== null) {
-      setIsAuthenticated(true)
-    }
+    const initAuth = async () => {
+      const token = await getOAuthToken()
+      if (token) {
+        setIsAuthenticated(true)
+        return
+      }
 
-    const initAuth = () => {
       const { search, pathname } = location
+      console.log(pathname)
       const params = search ? queryString.parse(search) : {}
       if (
         params &&
@@ -51,6 +54,7 @@ export const AuthProvider = ({ children, location }) => {
       // get news access token
       try {
         const refresh_token = localStorage.getItem('refresh_token')
+        if (!refresh_token) return
         const res = await Axios.get(
           `${URL_ENDPOINT}/refresh_token?refresh_token=${refresh_token}`
         )

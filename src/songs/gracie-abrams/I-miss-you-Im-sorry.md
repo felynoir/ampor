@@ -1,8 +1,9 @@
 ---
-slug: '/nive/tired-2'
-date: '2019-05-09'
-geniusId: '12345'
-title: 'Tfew'
+slug: '/gracie-abrams/I-miss-you-Im-sorry'
+date: '2019-05-10'
+geniusId: '5437170'
+spotifyURI: 'spotify:track:1tF7RL54zjHSy0N2qEQLDY'
+title: "I miss you, I'm sorry"
 ---
 
 # hello, This is Markdown Live Preview

@@ -9,12 +9,22 @@ const Spotify = ({ getToken, spotifyURI }) => {
   const { spotifyPlayer, state, isLoading, spotifyAPICall } = useSpotifyPlayer()
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState()
-  const { paused } = state ? state : {}
+  const {
+    paused,
+    track_window: {
+      current_track: { uri },
+    },
+  } = state ? state : {}
 
   const handlePlayTrack = async () => {
+    if (uri === spotifyURI) {
+      state.paused && spotifyPlayer.resume()
+      !state.paused && spotifyPlayer.pause()
+      return
+    }
+
     try {
       const token = await getToken()
-
       const option = {
         uris: [spotifyURI],
       }
@@ -23,7 +33,6 @@ const Spotify = ({ getToken, spotifyURI }) => {
         option,
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      console.log(res.data)
     } catch (e) {
       console.error(e)
       setError(errorHandler(e.response?.data?.error))
@@ -40,7 +49,10 @@ const Spotify = ({ getToken, spotifyURI }) => {
   return (
     <>
       {error}
-      <PlayPauseButton playing={paused} handleOnClick={handlePlayTrack} />
+      <PlayPauseButton
+        playing={uri === spotifyURI ? paused : true}
+        handleOnClick={handlePlayTrack}
+      />
     </>
   )
 }

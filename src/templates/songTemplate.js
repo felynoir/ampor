@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Layout from '../components/Song/Layout'
 import TypingLetter from '../components/TypingLetter'
 
@@ -50,9 +50,7 @@ const SongTemplate = ({ data }) => {
   const { isAuthenticated, getToken } = useAuth()
   const { song, md } = data ? data : {}
   const { full_title, song_art_image_url } = song ? song : {}
-  const {
-    frontmatter: { spotifyURI },
-  } = md ? md : {}
+  const { frontmatter: { spotifyURI } = {} } = md ? md : {}
   const handleLoggin = async () => {
     if (typeof window === undefined) return
     const res = await Axios.get('http://localhost:8888/login', {
@@ -67,6 +65,8 @@ const SongTemplate = ({ data }) => {
     <Container>
       <MediaContainer>
         <Box>
+          <Link to="/gracie-abrams/I-miss-you-Im-sorry">GRACIE</Link>
+          <Link to="/nive/tired">NIVE</Link>
           <Text mb={3} color="primary" fontSize={[2, 3, 4]} textAlign="center">
             {full_title}
           </Text>

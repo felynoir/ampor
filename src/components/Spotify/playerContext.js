@@ -18,6 +18,7 @@ export const SpotifyPlayerProvider = ({ children }) => {
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
+      console.log('web ready', isAuthenticated)
       if (!isAuthenticated) return
 
       const player = new window.Spotify.Player({
