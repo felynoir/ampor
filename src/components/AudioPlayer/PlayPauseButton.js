@@ -33,13 +33,13 @@ const CheckBox = styled.input`
   }
 `
 
-const PlayPauseButton = ({ playing, setPlaying }) => {
+const PlayPauseButton = ({ playing, handleOnClick }) => {
   return (
     <PlayPause>
-      <CheckBox type="checkbox" id="playPauseCheckbox" />
+      <CheckBox type="checkbox" id="playPauseCheckbox" checked={!playing} />
       <CheckBoxLabel
         htmlFor="playPauseCheckbox"
-        onClick={() => setPlaying(!playing)}
+        onClick={() => handleOnClick()}
       />
     </PlayPause>
   )

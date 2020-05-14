@@ -5,13 +5,13 @@ exports.onCreateNode = async ({ node, actions }) => {
   const { createNode, createNodeField } = actions
 
   if (node.internal.type === 'MarkdownRemark') {
+    console.log('found', node)
     if (node.frontmatter.geniusId === null) return
     try {
       const geniusId = node.frontmatter.geniusId
       const res = await axios.get(
         `https://api.genius.com/songs/${geniusId}?access_token=iFYbsUEjcX6Y6jzgjjmuqkNoRASAYFW53yJXWdywBE84NOQILwaOCJD4vWOyCFfm`
       )
-      console.log('found', node)
       if (res.status !== 200) return
       createNode({
         ...res.data.response.song,
@@ -66,7 +66,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.frontmatter.slug,
       component: songTemplate,
       context: {
-        geniusId: node.frontmatter.geniusId ? node.frontmatter.geniusId : 'ff',
+        geniusId: node.frontmatter.geniusId ? node.frontmatter.geniusId : '',
+        slug: node.frontmatter.slug ? node.frontmatter.slug : '',
       },
     })
   })

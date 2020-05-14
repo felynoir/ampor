@@ -46,9 +46,13 @@ const SpotifyLogin = styled.button`
   user-select: none;
 `
 
-const SongTemplate = ({ data: { song } }) => {
+const SongTemplate = ({ data }) => {
   const { isAuthenticated, getToken } = useAuth()
-  const { full_title, song_art_image_url } = song
+  const { song, md } = data ? data : {}
+  const { full_title, song_art_image_url } = song ? song : {}
+  const {
+    frontmatter: { spotifyURI },
+  } = md ? md : {}
   const handleLoggin = async () => {
     if (typeof window === undefined) return
     const res = await Axios.get('http://localhost:8888/login', {
@@ -67,7 +71,7 @@ const SongTemplate = ({ data: { song } }) => {
             {full_title}
           </Text>
           {isAuthenticated ? (
-            <Spotify getToken={getToken} />
+            <Spotify getToken={getToken} spotifyURI={spotifyURI} />
           ) : (
             <SpotifyLogin onClick={() => handleLoggin()}>
               Spotify Login
@@ -94,11 +98,18 @@ const WrapLayoutToTemplate = props => {
 export default WrapLayoutToTemplate
 
 export const pageQuery = graphql`
-  query($geniusId: String!) {
+  query($geniusId: String!, $slug: String!) {
     song: songFromGenius(id: { eq: $geniusId }) {
       id
       full_title
       song_art_image_url
+    }
+
+    md: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+      frontmatter {
+        title
+        spotifyURI
+      }
     }
   }
 `

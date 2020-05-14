@@ -5,51 +5,42 @@ import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
 
 import { errorHandler } from './errorHandler'
 
-const Spotify = ({ getToken }) => {
-  const { spotifyPlayer, state } = useSpotifyPlayer()
+const Spotify = ({ getToken, spotifyURI }) => {
+  const { spotifyPlayer, state, isLoading, spotifyAPICall } = useSpotifyPlayer()
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState()
-  const isFirstRender = useRef(true)
+  const { paused } = state ? state : {}
 
-  const callAPI = async ({ url, method, data }) => {
+  const handlePlayTrack = async () => {
     try {
-      const access_token = await getToken()
-      console.log(access_token)
-      const res = await axios({
-        url,
-        method,
-        data,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      setError()
+      const token = await getToken()
+
+      const option = {
+        uris: [spotifyURI],
+      }
+      const res = await axios.put(
+        `${process.env.SPOTIFY_API_URL}player/play`,
+        option,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      console.log(res.data)
     } catch (e) {
-      setError(errorHandler(e.response.data.error))
+      console.error(e)
+      setError(errorHandler(e.response?.data?.error))
     }
   }
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-
-    const url = playing
-      ? 'https://api.spotify.com/v1/me/player/pause'
-      : 'https://api.spotify.com/v1/me/player/play'
-    callAPI({ url, method: 'PUT' })
-  }, [playing])
+  if (isLoading) {
+    return <div>Loading Device</div>
+  }
+  if (!state) {
+    return <div>Please Select `Ampor` Device.</div>
+  }
 
   return (
     <>
       {error}
-      {state ? (
-        <PlayPauseButton playing={playing} setPlaying={setPlaying} />
-      ) : (
-        <div>Please Select Device</div>
-      )}
+      <PlayPauseButton playing={paused} handleOnClick={handlePlayTrack} />
     </>
   )
 }

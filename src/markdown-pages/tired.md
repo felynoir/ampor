@@ -2,6 +2,7 @@
 slug: '/nive/tired'
 date: '2019-05-04'
 geniusId: '4906198'
+spotifyURI: 'spotify:track:7BWvtYsoM6KzgsXXVpYPqA'
 title: 'Tired by Nive'
 ---
 
