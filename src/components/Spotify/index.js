@@ -2,19 +2,15 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useSpotifyPlayer } from './playerContext'
 import PlayPauseButton from '../AudioPlayer/PlayPauseButton'
-
 import { errorHandler } from './errorHandler'
 
 const Spotify = ({ getToken, spotifyURI }) => {
   const { spotifyPlayer, state, isLoading, spotifyAPICall } = useSpotifyPlayer()
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState()
-  const {
-    paused,
-    track_window: {
-      current_track: { uri },
-    },
-  } = state ? state : {}
+  const { paused } = state ? state : {}
+
+  const uri = state?.track_window?.current_track?.uri
 
   const handlePlayTrack = async () => {
     if (uri === spotifyURI) {

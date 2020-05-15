@@ -3,6 +3,7 @@ slug: '/nive/tired'
 date: '2019-05-04'
 geniusId: '4906198'
 spotifyURI: 'spotify:track:7BWvtYsoM6KzgsXXVpYPqA'
+imgCover: 'https://i.scdn.co/image/ab67616d00001e025a8e0e194261522355b92304'
 title: 'Tired by Nive'
 ---
 
