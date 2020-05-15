@@ -3,7 +3,7 @@ slug: '/gracie-abrams/I-miss-you-Im-sorry'
 date: '2019-05-10'
 geniusId: '5437170'
 spotifyURI: 'spotify:track:1tF7RL54zjHSy0N2qEQLDY'
-imgCover: 'https://i.scdn.co/image/ab67616d00001e020fd496bb24996b2c4974b35d'
+imgCover: 'https://i.scdn.co/image/ab67616d00001e02a5ea254e4c2f87956a6c64bb'
 title: "I miss you, I'm sorry"
 ---
 
