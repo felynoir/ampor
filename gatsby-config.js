@@ -6,6 +6,12 @@ module.exports = {
     url: `https://ampor.xyz`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [require(`tailwindcss`)],
+      },
+    },
     'gatsby-plugin-theme-ui',
     `gatsby-plugin-react-helmet`,
     {

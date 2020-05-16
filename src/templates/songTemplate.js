@@ -7,18 +7,22 @@ import Spotify from '../components/Spotify'
 import { useAuth } from '../components/Spotify/authContext'
 
 import styled from 'styled-components'
-import { Text, Flex, Box } from 'rebass'
 import Axios from 'axios'
 
 import * as Vibrant from 'node-vibrant'
 
-const Container = styled(Flex)`
+const Container = styled.div`
+  display: flex;
   flex-direction: column;
 `
 
-const MediaContainer = styled(Flex)`
+const MediaContainer = styled.div`
+  display: flex;
   flex-wrap: wrap;
-  background-color: ${props => props.bgColor || 'whitesmoke'};
+  background: ${props => {
+    if (!props.bgColor) return 'linear-gradient(whitesmoke,black)'
+    return `linear-gradient(${props.bgColor})`
+  }};
   align-items: center;
 `
 
@@ -54,9 +58,9 @@ const SongTemplate = ({ data }) => {
     Vibrant.from(imgCover)
       .getPalette()
       .then(palette => {
-        const { _rgb } = palette['DarkMuted']
-        console.log(_rgb)
-        setBgColor(`rgb(${_rgb.join(', ')})`)
+        const { _rgb: _rgbLight } = palette['Muted']
+        const { _rgb: _rgbDark } = palette['DarkMuted']
+        setBgColor(`rgb(${_rgbLight.join(', ')}), rgb(${_rgbDark.join(', ')})`)
       })
   }, [])
 
@@ -72,22 +76,27 @@ const SongTemplate = ({ data }) => {
 
   return (
     <Container>
-      <MediaContainer bgColor={bgColor}>
-        <img src={imgCover} />
-        <Box>
-          <Text mb={3} color="primary" fontSize={[2, 3, 4]} textAlign="center">
-            {full_title}
-          </Text>
-          {isAuthenticated ? (
-            <Spotify getToken={getToken} spotifyURI={spotifyURI} />
-          ) : (
-            <SpotifyLogin onClick={() => handleLoggin()}>
-              Spotify Login
-            </SpotifyLogin>
-          )}
-        </Box>
+      <MediaContainer bgColor={bgColor} className="flex-col p-10">
+        <img className="mx-auto" src={imgCover} />
+        <div
+          className="max-w-xs rounded-lg p-4 mt-4 text-white"
+          style={{ background: 'rgba(0,0,0,0.2)' }}
+        >
+          <div className="text-center">
+            <h2 className="text-sm md:text-xl">{full_title}</h2>
+          </div>
+          <div className="flex justify-center mt-3">
+            {isAuthenticated ? (
+              <Spotify getToken={getToken} spotifyURI={spotifyURI} />
+            ) : (
+              <SpotifyLogin onClick={() => handleLoggin()}>
+                Spotify Login
+              </SpotifyLogin>
+            )}
+          </div>
+        </div>
       </MediaContainer>
-      <div>
+      <div className="p-10">
         <p>
           [Verse 1]
           <br />
