@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Song/Layout'
-import TypingLetter from '../components/TypingLetter'
+import Lyric from '../components/Song/Lyric'
 
 import Spotify from '../components/Spotify'
 import { useAuth } from '../components/Spotify/authContext'
@@ -10,6 +10,12 @@ import styled from 'styled-components'
 import Axios from 'axios'
 
 import * as Vibrant from 'node-vibrant'
+
+import shareThis from 'share-this'
+
+import * as twitterSharer from 'share-this/dist/sharers/twitter'
+import './sss.css'
+import * as facebookSharer from 'share-this/dist/sharers/facebook'
 
 const Container = styled.div`
   display: flex;
@@ -52,9 +58,17 @@ const SongTemplate = ({ data }) => {
   const [bgColor, setBgColor] = useState()
   const { song, md } = data ? data : {}
   const { full_title, song_art_image_url } = song ? song : {}
-  const { frontmatter: { spotifyURI, imgCover } = {} } = md ? md : {}
+  const { frontmatter: { spotifyURI, imgCover } = {}, html } = md ? md : {}
 
   useEffect(() => {
+    const selectionShare = shareThis({
+      selector: '#lyric',
+      sharers: [twitterSharer, facebookSharer],
+      popoverClass: 'popover',
+    })
+
+    selectionShare.init()
+
     Vibrant.from(imgCover)
       .getPalette()
       .then(palette => {
@@ -66,7 +80,7 @@ const SongTemplate = ({ data }) => {
 
   const handleLoggin = async () => {
     if (typeof window === undefined) return
-    const res = await Axios.get('http://localhost:8888/login', {
+    const res = await Axios.get(`${process.env.AMPOR_API_URL}login`, {
       withCredentials: true,
     })
     console.log(document.cookie)
@@ -97,98 +111,7 @@ const SongTemplate = ({ data }) => {
         </div>
       </MediaContainer>
       <div className="p-10">
-        <p>
-          [Verse 1]
-          <br />
-          Do you remember happy together?
-          <br />I do, don't you?
-          <br />
-          Then all of a sudden, you're sick to your stomach
-          <br />
-          Is that still true?
-          <br />
-          <br />
-          [Chorus]
-          <br />
-          You said, "forever," in the end I fought it
-          <br />
-          Please be honest, are we better for it?
-          <br />
-          Thought you'd hate me, but instead you called
-          <br />
-          And said, "I miss you"
-          <br />I caught it
-          <br />
-          <br />
-          [Verse 2]
-          <br />
-          Good to each other, give it the summer
-          <br />I knew, you too
-          <br />
-          But I only saw you once in December
-          <br />
-          I'm still confused
-          <br />
-          <br />
-          [Chorus]
-          <br />
-          You said, "forever," and I almost bought it
-          <br />I miss fighting in your old apartment
-          <br />
-          Breaking dishes when you're disappointed
-          <br />I still love you, I promise
-          <br />
-          Nothing happened in the way I wanted
-          <br />
-          Every corner of this house is haunted
-          <br />
-          And I know you said that we're not talking
-          <br />
-          But I miss you, I'm sorry
-          <br />
-          <br />
-          [Outro]
-          <br />I don't wanna go, think I'll make it worse
-          <br />
-          Everything I know brings me back to us
-          <br />I don't wanna go, we've been here before
-          <br />
-          Everywhere I go leads me back to you
-          <br />I don't wanna go, think I'll make it worse
-          <br />
-          <i>(You said, "forever," and I almost bought it)</i>
-          <br />
-          Everything I know brings me back to us
-          <br />
-          <i>(I miss fighting in your old apartment)</i>
-          <br />I don't wanna go, we've been here before
-          <br />
-          <i>(Breaking dishes when you're disappointed)</i>
-          <br />
-          Everywhere I go leads me back to you
-          <br />
-          <i>(I still love you, I promise)</i>
-          <br />I don't wanna go, think I'll make it worse
-          <br />
-          <i>(Nothing happened in the way I wanted)</i>
-          <br />
-          Everything I know brings me back to us
-          <br />
-          <i>(Every corner of this house is haunted)</i>
-          <br />I don't wanna go, we've been here before
-          <br />
-          <i>(And I know you said that we're not talking)</i>
-          <br />
-          Everywhere I go leads me back to you
-          <br />
-          <i>(But I miss you)</i>
-          <br />I don't wanna go, think I'll make it worse
-          <br />
-          Everything I know brings me back to us
-          <br />I don't wanna go, we've been here before
-          <br />
-          Everywhere I go leads me back to you
-        </p>
+        <Lyric html={html} />
       </div>
     </Container>
   )
@@ -218,6 +141,7 @@ export const pageQuery = graphql`
         spotifyURI
         imgCover
       }
+      html
     }
   }
 `

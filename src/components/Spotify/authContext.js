@@ -3,8 +3,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import Axios from 'axios'
 import queryString from 'query-string'
 
-const URL_ENDPOINT = 'http://localhost:8888'
-
 const defaultContext = {
   isAuthenticated: false,
   getToken: () => {},
@@ -56,7 +54,7 @@ export const AuthProvider = ({ children, location }) => {
         const refresh_token = localStorage.getItem('refresh_token')
         if (!refresh_token) return
         const res = await Axios.get(
-          `${URL_ENDPOINT}/refresh_token?refresh_token=${refresh_token}`
+          `${process.env.AMPOR_API_URL}refresh_token?refresh_token=${refresh_token}`
         )
         const { access_token, expires_in } = res.data
         localStorage.setItem('access_token', access_token)
