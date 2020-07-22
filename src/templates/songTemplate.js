@@ -110,7 +110,7 @@ const SongTemplate = ({ data }) => {
           </div>
         </div>
       </MediaContainer>
-      <div className="p-10">
+      <div className="p-5 md:p-10">
         <Lyric html={html} />
       </div>
     </Container>

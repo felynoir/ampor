@@ -20,9 +20,8 @@ export const AuthProvider = ({ children, location }) => {
         setIsAuthenticated(true)
         return
       }
-
+      alert('fuck')
       const { search, pathname } = location
-      console.log(pathname)
       const params = search ? queryString.parse(search) : {}
       if (
         params &&
@@ -31,6 +30,7 @@ export const AuthProvider = ({ children, location }) => {
         params.refresh_token &&
         params.expires_in
       ) {
+        alert('yeah')
         localStorage.setItem('access_token', params.access_token)
         localStorage.setItem('refresh_token', params.refresh_token)
         localStorage.setItem('expires_in', params.expires_in)
