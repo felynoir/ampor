@@ -8,6 +8,7 @@ import AudioPlayer from '../components/AudioPlayer'
 
 import useAudioPlayer from '../components/AudioPlayer/useAudioPlayer'
 import { todayAudio } from '../components/AudioPlayer/audio-lists'
+import { AmpStoryProvider } from '../components/Amp/storyContext'
 import Axios from 'axios'
 
 const CoverFlex = styled(Flex)`
@@ -66,8 +67,20 @@ const HomePage = ({ params, ...props }) => {
             <Text>im glad youre here</Text>
           </GreetingBox>
         </LeftFlex>
-        <RightFlex>
-          <AudioPlayer />
+        <RightFlex flexDirection="column">
+          <AmpStoryProvider>
+            <Flex alignItems="center">
+              <amp-story-player style={{ width: '360px' }}>
+                <a href="https://amp-playground.vercel.app/17012.html">
+                  My Project
+                </a>
+              </amp-story-player>
+              <Flex flexDirection="column" alignItems="center" flex="1 auto">
+                <a href="">P1</a>
+                <p>P2</p>
+              </Flex>
+            </Flex>
+          </AmpStoryProvider>
         </RightFlex>
       </CoverFlex>
     </Layout>
