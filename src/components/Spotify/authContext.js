@@ -20,7 +20,6 @@ export const AuthProvider = ({ children, location }) => {
         setIsAuthenticated(true)
         return
       }
-      alert('fuck')
       const { search, pathname } = location
       const params = search ? queryString.parse(search) : {}
       if (
