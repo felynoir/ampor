@@ -62,7 +62,7 @@ const HomePage = ({ params, ...props }) => {
           <GreetingBox mr={[2, 3, 5]} flexDirection="column">
             <Text fontSize={[3, 4, 6]}>
               ThIs Is Me._.
-              <BOLD>`AMPOR`</BOLD>{' '}
+              <BOLD>`17012`</BOLD>{' '}
             </Text>
             <Text>im glad youre here</Text>
           </GreetingBox>
@@ -75,9 +75,17 @@ const HomePage = ({ params, ...props }) => {
                   My Project
                 </a>
               </amp-story-player>
-              <Flex flexDirection="column" alignItems="center" flex="1 auto">
-                <a href="">P1</a>
-                <p>P2</p>
+              <Flex
+                flexDirection="column"
+                alignItems="center"
+                flex="1 auto"
+                p={2}
+              >
+                <h2>List Song</h2>
+                <a href="/nive/tired">Tired</a>
+                <a href="/gracie-abrams/I-miss-you-Im-sorry">
+                  I miss you Im Sorry
+                </a>
               </Flex>
             </Flex>
           </AmpStoryProvider>
