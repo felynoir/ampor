@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-AxjAm jDDlwE"
+>
+  <div
+    style={
+      Object {
+        "--number-count": 0,
+        "--number-delay": "17.796943913173035ms",
+        "height": 36.13767018736932,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 1,
+        "--number-delay": "111.82959066280782ms",
+        "height": 25.151828831499294,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 2,
+        "--number-delay": "43.16051289057211ms",
+        "height": 53.163561737572124,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 3,
+        "--number-delay": "46.16464938960913ms",
+        "height": 30.77717567247322,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 4,
+        "--number-delay": "115.4143777934439ms",
+        "height": 40.597109529957606,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 5,
+        "--number-delay": "287.3686715241455ms",
+        "height": 11.028934938368536,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 6,
+        "--number-delay": "24.60482206294703ms",
+        "height": 13.960750739054689,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 7,
+        "--number-delay": "470.22112534815994ms",
+        "height": 23.617042864878357,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 8,
+        "--number-delay": "426.91969624205706ms",
+        "height": 32.09267151619245,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 9,
+        "--number-delay": "260.3729587064195ms",
+        "height": 6.845255187062406,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 10,
+        "--number-delay": "639.0949433657314ms",
+        "height": 45.47889650995887,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 11,
+        "--number-delay": "536.6554929770938ms",
+        "height": 16.47128442168382,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 12,
+        "--number-delay": "345.7478709160624ms",
+        "height": 3.5416766583881696,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 13,
+        "--number-delay": "832.1590596724598ms",
+        "height": 16.787426719396535,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 14,
+        "--number-delay": "177.80281854341263ms",
+        "height": 27.664820320275567,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 15,
+        "--number-delay": "4.471244051646792ms",
+        "height": 42.5955845147991,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 16,
+        "--number-delay": "922.7968345276121ms",
+        "height": 13.584342486393524,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 17,
+        "--number-delay": "937.3031570270438ms",
+        "height": 59.400852705953014,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 18,
+        "--number-delay": "976.7175620921464ms",
+        "height": 0.2894213002966808,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "--number-count": 19,
+        "--number-delay": "755.7606097680732ms",
+        "height": 47.862064724020215,
+      }
+    }
+  />
+</div>
+`;
